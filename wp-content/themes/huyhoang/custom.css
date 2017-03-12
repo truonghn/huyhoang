@@ -1,0 +1,206 @@
+/* Add your own styles here */
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,300,400,600,700');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,600,700');
+h1, h2, h3, h4{
+    font-family: 'Montserrat', sans-serif;
+}
+body , p, a, span, label{
+    font-family: 'Roboto', sans-serif;
+}
+a:visited {
+    color:#8c9e81;
+}
+.site-header .site-branding a img{
+    width: 120px;
+    height: 60px;
+}
+.site-logo {
+    float: left;
+}
+.site-logo a {
+    display: block;
+    line-height: 60px;
+    margin-right:20px;
+}
+.title-wrapper {
+    float: left;
+}
+.title-wrapper a {
+    font-weight: 300;
+    font-size:14px;
+    color:#8c9e81;
+    letter-spacing:1px;
+    text-align:left;
+    display: block;
+    line-height: 14px;
+    margin-left:20px;
+}
+.title-wrapper .site-description {
+    font-weight:bold;
+    font-size:22px;
+    color:#519423;
+    text-align:left;
+    line-height: 22px;
+    margin-top: 20px;
+}
+.site-header .widget_text {
+    margin: 0px !important;
+    padding: 0px;
+}
+.site-header .textwidget {
+  line-height: 16px;
+}
+.contact-section .label-contact {
+font-size:13px;
+color:#8791a0;
+}
+.contact-section .text {
+    font-size: 16px;
+    font-weight: bold;
+}
+.contact-section .phone, .contact-section .mail{
+  float:left;
+}
+.contact-section .phone .icon{
+  background: url('images/phone.png') no-repeat center;
+}
+.contact-section .mail .icon{
+  background: url('images/mail.png') no-repeat center;
+}
+.header-contact {
+    text-align: left;
+}
+.contact-section .wrapper{
+    float: left;
+    margin-left:10px;
+}
+.contact-section .label-contact, .contact-section .text {
+    float: left;
+}
+.contact-section .label-contact {
+    margin-bottom: 10px;
+    width: 100%;
+}
+.contact-section .icon{
+    float: left;
+    width: 40px;
+    height: 40px;
+    margin: 0px;
+    padding: 0px;
+    border:1px solid #77bb47;
+    border-radius:2px;
+}
+.contact-section  {
+    float: right;
+}
+.main-navigation, .main-navigation.toggled ul {
+    background-color: #519423;
+}
+.main-navigation .nav-menu  li  a {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+}
+.main-navigation .nav-menu  li  a:visited {
+    color: #fff;
+}
+.main-navigation .nav-menu  li.current-menu-item  a {
+    border-bottom: 2px solid #fff;
+}
+.main-navigation a:after {
+    background: none;
+}
+.main-navigation .menu {
+    text-align: center;
+    background: none;
+    display: block;
+}
+.main-navigation ul li {
+    float: none;
+}
+#colophon {
+    border-top:none;
+}
+footer {
+    background-color: #fff;
+    box-shadow: 0 1px 8px 0 rgba(0,0,0,0.10)
+}
+.site-footer .widget:not(.widget_newsmag_banner):not(.newsmag_slider) > h3.widget-title {
+    font-family:Montserrat-SemiBold;
+    font-size:18px;
+    color:#313944;
+    text-align:left;
+    margin-bottom: 10px;
+}
+.site-footer .widget:not(.widget_newsmag_banner):not(.newsmag_slider).widget_text a{
+    font-size:16px;
+    color:#686c71;
+    letter-spacing:0;
+    text-align:left;
+}
+.site-footer .widget:not(.widget_newsmag_banner):not(.newsmag_slider).widget_text a:hover {
+    color:#519423;
+}
+.site-footer .widget ul {
+    margin: 0px;
+    padding: 0px 20px 0px;
+}
+.site-footer .widget li {
+    list-style-type: disc;
+    color: #8791a0 !important;
+    margin:5px 0px;
+}
+.site-footer .widget ul.contact-us {
+    padding: 0px;
+}
+.site-footer .widget ul.contact-us li {
+    padding-left: 25px;
+    list-style-type: none;
+    background-repeat: no-repeat;
+    background-position: 0px 5px;
+}
+.site-footer .widget ul.contact-us li.phone {
+    background-image: url(images/phone-ft.png);
+}
+.site-footer .widget ul.contact-us li.address {
+    background-image: url(images/location-ft.png);
+}
+.site-footer .widget ul.contact-us li.fax {
+    background-image: url(images/fax-ft.png);
+}
+.site-footer .widget ul.contact-us li.email {
+    background-image: url(images/mail-ft.png);
+}
+#colophon .footer-widgets-area {
+    background-color: #fff;
+}
+footer .site-info {
+    border-top:1px solid #e9ecf1;
+    background-color: #fff;
+}
+footer .copy-huyhoang {
+    font-size:16px;
+    color:#8791a0;
+    text-align:left;
+}
+#colophon .regular-footer-area > .container {
+    border-bottom: none;
+}
+.site-footer .widget:not(.widget_newsmag_banner):not(.newsmag_slider).widget_text a, .site-info *, .site-info a {
+    font-family: Roboto-Regular;
+}
+
+
+@media screen and (max-width: 768px) {
+    .contact-section {
+        float:left;
+    }
+}
+@media screen and (max-width: 767px) {
+    .main-navigation .menu {
+        display: none;
+    }
+    .contact-section .phone{
+        padding-bottom: 10px;
+    }
+}

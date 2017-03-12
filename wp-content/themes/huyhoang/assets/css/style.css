@@ -1,0 +1,7 @@
+/* Add your own styles here */
+@import url('https://fonts.googleapis.com/css?family=Noticia+Text:400,400i,700,700i');
+.site-header .site-branding {
+    height: 60px;
+    padding-top:20px;
+    padding-bottom: 20px;
+}
