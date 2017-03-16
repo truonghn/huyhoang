@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="10px" viewBox="0 0 30 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard 3</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M19.55,0.65 C18.95,0.05 18.35,0.05 17.7,0.65 L10,7.3 L2.35,0.65 C1.7,0.05 1.1,0.05 0.45,0.65 C-0.15,1.25 -0.15,1.85 0.5,2.45 L9.1,9.9 C9.35,10.1 9.65,10.2 10,10.2 C10.4,10.2 10.7,10.1 10.95,9.9 L19.55,2.45 C20.15,1.8 20.15,1.2 19.55,0.65 L19.55,0.65 L19.55,0.65 L19.55,0.65 Z" id="path-1"></path>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="19.9939376" height="10" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Design" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard-3" stroke-width="0.4" stroke="#FFFFFF" fill="#555555">
+            <g id="icon-arrow">
+                <g id="Design">
+                    <g>
+                        <g id="icon-arrow">
+                            <g id="Layer_1">
+                                <g id="Design">
+                                    <g id="Menu_320px-Copy-3">
+                                        <use id="Page-1" mask="url(#mask-2)" xlink:href="#path-1"></use>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
