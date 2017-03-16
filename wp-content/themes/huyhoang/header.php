@@ -34,7 +34,7 @@
 	<header id="masthead" class="site-header" role="banner">
 		<div class="site-branding container <?php echo $center_class ? 'centered-branding' : '' ?>">
 			<div class="row">
-				<div class="col-md-6 col-sm-12 header-logo">
+				<div class="col-md-4 col-sm-12 header-logo">
 					<div class='site-logo'>
 					<?php
 					$header_textcolor = get_theme_mod( 'header_textcolor' );
@@ -52,7 +52,7 @@
 					</div>
 				</div>
 
-				<div class="col-md-6 col-sm-12 header-contact">
+				<div class="col-md-8 col-sm-12 header-contact">
 					<?php dynamic_sidebar('contact-sidebar'); ?>
 				</div>
 			</div>

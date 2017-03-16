@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="6px" height="10px" viewBox="0 0 6 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>Shape</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="01.Trang_Chu" transform="translate(-549.000000, -2045.000000)" fill-rule="nonzero" fill="#3357B4">
+            <g id="Body" transform="translate(0.000000, 761.000000)">
+                <g id="Banner" transform="translate(0.000000, 1147.000000)">
+                    <g id="Xem-them" transform="translate(521.000000, 124.000000)">
+                        <path d="M33.2037075,17.5605232 L29.0456674,13.1855253 C28.928084,13.0618076 28.7890123,13 28.6280299,13 C28.4670475,13 28.3278784,13.0618076 28.2102949,13.1855253 C28.0927115,13.3092431 28.0339685,13.4556726 28.0339685,13.6249508 L28.0339685,22.3749124 C28.0339685,22.5441563 28.0927115,22.6906885 28.2102949,22.8143379 C28.3280084,22.9380556 28.4671776,23 28.6280299,23 C28.7889148,23 28.928084,22.9380556 29.0456674,22.8143379 L33.2037075,18.43934 C33.3211934,18.315759 33.380164,18.1692269 33.380164,17.9999145 C33.380164,17.8306705 33.3212259,17.684241 33.2037075,17.5605232 Z" id="Shape"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
