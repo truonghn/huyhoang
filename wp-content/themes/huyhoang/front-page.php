@@ -53,9 +53,9 @@ get_header(); ?>
     <span class="line-break"></span>
     <div class='row'>
     <?php 
-      $featured_bds = list_bds('bat_dong_san', array('102'));
+      $featured_bds = list_bds('bat_dong_san', array('102'), array(), 6);
       foreach ($featured_bds as $bds) : 
-         print huyhoang_bds_theme($bds);
+         print huyhoang_bds_item($bds);
        endforeach;
     ?>
     </div>
@@ -78,9 +78,9 @@ get_header(); ?>
     <span class="line-break"></span>
     <div class='row'>
     <?php 
-      $featured_bds = list_bds('bat_dong_san', array('103'));
+      $featured_bds = list_bds('bat_dong_san', array('103'), array(), 6);
       foreach ($featured_bds as $bds) : 
-         print huyhoang_bds_theme($bds);
+         print huyhoang_bds_item($bds);
        endforeach;
     ?>
     </div>
