@@ -72,7 +72,7 @@ class Newsmag_Breadcrumbs {
 		// Setup default array for changeable variables
 		$defaults = array(
 			'home_prefix'            => get_theme_mod( 'newsmag_blog_breadcrumb_menu_prefix', __( '', 'newsmag' ) ),
-			'separator'              => '/',
+			'separator'              => '&rsaquo;',
 			'show_post_type_archive' => '1',
 			'show_terms'             => get_theme_mod( 'newsmag_blog_breadcrumb_menu_post_category', true ),
 			'home_label'             => esc_html__( 'Home', 'newsmag' ),
@@ -709,7 +709,6 @@ class Newsmag_Breadcrumbs {
 		if ( $separator ) {
 			$separator_markup = sprintf( '<span class="newsmag-breadcrumb-sep">%s</span>', $this->separator );
 		}
-
 		return sprintf( '<span %s>%s</span>%s', $microdata_itemscope, $breadcrumb_content, $separator_markup );
 	}
 }
