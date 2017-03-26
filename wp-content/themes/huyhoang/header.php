@@ -45,11 +45,6 @@
 					}
 					?>
 					</div>
-					<div class="title-wrapper">
-						<a class="site-title"
-						   href="<?php echo esc_url_raw( get_home_url() ) ?>"> <?php echo get_option( 'blogname', 'newsmag' ) ?></a>
-						<p class="site-description"><?php echo wp_kses_post( get_bloginfo( 'description', 'display' ));?></p>
-					</div>
 				</div>
 
 				<div class="col-md-8 col-sm-12 header-contact">

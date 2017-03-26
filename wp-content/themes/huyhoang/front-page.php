@@ -20,30 +20,26 @@ get_header(); ?>
     <!-- search form -->
     <form action="/search" method="get" name="seach-bds-form">
     <div class="filter-loai-bds filter-bds">
-      <select>
+      <select name="bds_type">
         <option value=''>Loại Bất Động Sản</option>
         <option value='102'>Bất Động Sản Bán</option>
         <option value='103'>Bất Động Sản Cho Thuê</option>
       </select>
     </div>  
     <div class="filter-huyen filter-bds">
-      <select>
+      <select name="bds_quan">
         <option value=''>Quận/Huyện</option>
-        <option value='Hải Châu'>Hải Châu</option>
-        <option value='Liên Chiểu'>Liên Chiểu</option>
-        <option value='Cẩm Lệ'>Cẩm Lệ</option>
-        <option value='Thanh Khê'>Thanh Khê</option>
-        <option value='Hoà Vang'>Hoà Vang</option>
+        <?php foreach (huyhoang_load_quan() as $key => $value): ?>
+        <option value='<?php echo $key; ?>'><?php echo $value; ?></option>
+        <?php endforeach; ?>
       </select>
     </div>
     <div class="filter-phuong filter-bds">
-      <select>
+      <select name="bds_phuong">
         <option value=''>Phường/Xã</option>
-        <option value='Hải Châu 1'>Hải Châu 1</option>
-        <option value='Hoà Minh'>Hoà Minh</option>
-        <option value='Mân Thái'>Mân Thái</option>
-        <option value='Nại Hiên'>Nại Hiên</option>
-        <option value='Hoà Phong'>Hoà Phong</option>
+        <?php foreach (huyhoang_load_phuong() as $key => $value): ?>
+        <option value='<?php echo $key; ?>'><?php echo $value; ?></option>
+        <?php endforeach; ?>
       </select>
     </div>
       <input class="btn-search" type="submit" value="&nbsp" />

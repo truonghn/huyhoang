@@ -23,11 +23,14 @@ if ( function_exists( 'register_sidebar' ) ) {
 /**
  * Add custom css to the theme
  */
-function huyhoang_custom_css() {
+function huyhoang_custom_file() {
     $base = get_stylesheet_directory_uri();
     wp_enqueue_style( 'custom-style', $base.'/custom.css' );
+    wp_enqueue_script( 'custom-style', $base.'/custom.js' );
+    wp_enqueue_style( 'flex-slider', $base.'/flexslider/flexslider.css' );
+    wp_enqueue_script( 'flex-slider', $base.'/flexslider/jquery.flexslider.js' );
 }
-add_action('wp_enqueue_scripts', 'huyhoang_custom_css', 11 );
+add_action('wp_enqueue_scripts', 'huyhoang_custom_file', 11 );
 
 /**
  * Add custom post type
@@ -122,12 +125,13 @@ function list_bds($post_type, $categories = array(), $condition= array(), $limit
             $post['max_num_pages'] = $bds_query->max_num_pages;
         }
     endif;
+    wp_reset_postdata();
     return $post;
 
 }
 
 function huyhoang_parse_price($price, $currency, $type) {
-  if ($price <= 999) {
+  if ($price < 1000) {
     $unit = $price.' Triệu '.$currency;
   } else {
     $unit = ($price/1000) . ' Tỉ '. $currency;
@@ -138,7 +142,8 @@ function huyhoang_parse_price($price, $currency, $type) {
   return $unit;
 }
 
-function huyhoang_bds_item($post_id) {
+function huyhoang_bds_item($post_id, $num_col = 3) {
+    $num_col = 12/$num_col;
     $bds = get_post_custom($post_id);
     $price = 0;
     if (has_category(102, $post_id)) {
@@ -159,7 +164,7 @@ function huyhoang_bds_item($post_id) {
             $price = huyhoang_parse_price($bds['rent_price'][0], 'VND', 'thue');
         }  
     }
-    $output = '<div class="col-md-4 col-sm-6"><div class="bds-item">';
+    $output = '<div class="col-md-'.$num_col.' col-sm-6"><div class="bds-item">';
     $output.= $cat_div;
     $feature_image = '<div class="featured-image"><a href= "'.get_post_permalink($post_id).'">'. get_the_post_thumbnail($post_id).'</a></div>';
     $output.= $feature_image;
@@ -171,7 +176,7 @@ function huyhoang_bds_item($post_id) {
         $output.= $location;
     }
     
-    $des = '<div class="bds-des bds-field"><span>'.get_the_excerpt($post_id).'</span></div>';
+    $des = '<div class="bds-des bds-field"><span>'.get_post_excerpt_by_id($post_id).'</span></div>';
     $output.= $des;
     if (!empty($price)) {
         $price = '<div class="bds-price bds-field">'.$price.'</div>';
@@ -209,7 +214,7 @@ function huyhoang_du_an_item($post_id) {
         $location = '<div class="bds-location bds-field">'.get_field('position', $post_id).'</div>';
         $output.= $location;
     }
-    $des = '<div class="bds-des bds-field"><span>'.get_the_excerpt($post_id).'</span></div>';
+    $des = '<div class="bds-des bds-field"><span>'.get_post_excerpt_by_id($post_id).'</span></div>';
     $output.= $des;
     $output.='</div></div>';
     $output .='</div></div>';
@@ -256,7 +261,7 @@ add_filter( 'excerpt_more', 'huyhoang_custom_excerpt_more' );
 
 //custom pagination
 function huyhoang_pagination($numpages = '', $pagerange = '', $paged='') {
-
+  
   if (empty($pagerange)) {
     $pagerange = 5;
   }
@@ -287,7 +292,8 @@ function huyhoang_pagination($numpages = '', $pagerange = '', $paged='') {
    * function. 
    */
   $pagination_args = array(
-    'base'            => get_pagenum_link(1) . '%_%',
+    //'base'            => get_pagenum_link(1) . '%_%',
+    'base' => preg_replace('/\?.*/', '', get_pagenum_link(1)) . '%_%',
     'format'          => 'page/%#%',
     'total'           => $numpages,
     'current'         => $paged,
@@ -298,7 +304,8 @@ function huyhoang_pagination($numpages = '', $pagerange = '', $paged='') {
     'prev_text'       => __('&laquo;'),
     'next_text'       => __('&raquo;'),
     'type'            => 'plain',
-    'add_args'        => false,
+    'add_args' => array(
+    ),
     'add_fragment'    => ''
   );
   
@@ -308,5 +315,316 @@ function huyhoang_pagination($numpages = '', $pagerange = '', $paged='') {
       echo $paginate_links;
     echo "</nav>";
   }
-
 }
+
+/**
+ * Get post excerp by post id
+ */
+function get_post_excerpt_by_id( $post_id ) {
+    global $post;
+    $post = get_post( $post_id );
+    setup_postdata( $post );
+    $the_excerpt = get_the_excerpt();
+    wp_reset_postdata();
+    return $the_excerpt;
+}
+
+/**
+ * load quan/huyen
+ */
+function huyhoang_load_quan() {
+    return array(
+        'Hoà Vang' => 'Hoà Vang',
+        'Hải Châu' => 'Hải Châu',
+        'Cẩm Lệ'   => 'Cẩm Lệ',
+        'Liên Chiểu'=> 'Liên Chiểu'
+    );
+}
+
+/**
+ * Load Phường
+ */
+function huyhoang_load_phuong() {
+  return array(
+    'Hải Châu 1' => 'Hải Châu 1',
+    'Hoà Minh'   => 'Hoà Minh',
+    'Hoà Thọ'    => 'Hoà Thọ',
+    'Hoà Phong'  => 'Hoà Phong',
+    'Hoà Ninh'   => 'Hoà Ninh',
+    'Hải Châu 2' => 'Hải Châu 2'
+  );
+}
+
+/**
+ * Search bất động sản
+ */
+function search_bds($conditions= array(), $limit = 10, $paged = 1) {
+    $post = array();
+    $cat = array();
+    $arr_query = array(
+        'post_type'=> 'bat_dong_san',
+        'posts_per_page'=> $limit,
+        'paged' => $paged,
+        
+    );
+    if (!empty($conditions['bds_sort'])) {
+      switch ($conditions['bds_sort']) {
+          case '1':
+              $query_sort = array(
+                'orderby'           => 'date',
+                'order'             => 'DESC',
+              );
+              break;
+          case '2':
+              $query_sort = array(
+                'orderby'           => 'meta_value',
+                'order'             => 'ASC',
+              );
+              break;
+          case '3':
+              $query_sort = array(
+                'orderby'           => 'meta_value',
+                'order'             => 'DESC',
+              );
+              break;
+          case '4':
+              $query_sort = array(
+                'orderby'           => 'meta_value',
+                'order'             => 'DESC',
+                'meta_key'          => 'subject'
+              );
+              break;
+          case '5':
+              $query_sort = array(
+                    'orderby'           => 'meta_value',
+                    'order'             => 'ASC',
+                    'meta_key'          => 'subject'
+              );
+              break;
+          default: $query_sort = array();
+          break;
+          
+      }
+    }
+    if (!empty($query_sort)) {
+        $arr_query = array_merge($arr_query, $query_sort);
+    }
+    if (!empty($conditions['bds_type'])) {
+        $cat[] = $conditions['bds_type'];
+        if ($conditions['bds_type'] == '102') {
+            if (!empty($conditions['bds_sort']) && ($conditions['bds_sort'] == 2 || $conditions['bds_sort'] == 3)) {
+                $arr_query['meta_key'] = 'price';
+            }
+        } else {
+            if (!empty($conditions['bds_sort']) && ($conditions['bds_sort'] == 2 || $conditions['bds_sort'] == 3)) {
+                $arr_query['meta_key'] = 'rent_price';
+            }
+        }
+    }
+    if (!empty($conditions['bds_cat'])) {
+        $cat[] = $conditions['bds_cat'];
+    }
+    
+    if (!empty($cat)) {
+        $arr_query['category__and'] = $cat;
+    }
+
+    //query by subject
+    if (!empty($conditions['bds_subject'])) {
+        switch ($conditions['bds_subject']) {
+            case '1':
+                $fields[] = array(
+                    'key'       => 'subject',
+                    'value'     => array(50, 100),
+                    'compare'   => 'BETWEEN',
+                );    
+                break;
+            case '2':
+                $fields[] = array(
+                    'key'       => 'subject',
+                    'value'     => array(100, 200),
+                    'compare'   => 'BETWEEN',
+                ); 
+                break;
+            case '3':
+                $fields[] = array(
+                    'key'       => 'subject',
+                    'value'     => array(200, 300),
+                    'compare'   => 'BETWEEN',
+                ); 
+                break;
+            case '4':
+                $fields[] = array(
+                    'key'       => 'subject',
+                    'value'     => array(300, 400),
+                    'compare'   => 'BETWEEN',
+                ); 
+                break;
+            case '5':
+                $fields[] = array(
+                    'key'       => 'subject',
+                    'value'     => 500,
+                    'type'      => 'NUMERIC',
+                    'compare'   => '>',
+                ); 
+                break;
+              
+        }
+    }
+    //query by price
+    if (!empty($conditions['bds_price'])) {
+        
+        switch ($conditions['bds_price']) {
+            case '1':
+                $fields[] = array(
+                    'key'       => 'price',
+                    'value'     => 500,
+                    'type'      => 'NUMERIC',
+                    'compare'   => '<',
+                );    
+                break;
+            case '2':
+                $fields[] = array(
+                    'key'       => 'price',
+                    'value'     => array(500, 700),
+                    'compare'   => 'BETWEEN',
+                ); 
+                break;
+            case '3':
+                $fields[] = array(
+                    'key'       => 'price',
+                    'value'     => array(700, 1000),
+                    'compare'   => 'BETWEEN',
+                ); 
+                break;
+            case '4':
+                $fields[] = array(
+                    'key'       => 'price',
+                    'value'     => array(1000, 3000),
+                    'compare'   => 'BETWEEN',
+                ); 
+                break;
+            case '5':
+                $fields[] = array(
+                    'key'       => 'price',
+                    'value'     => 3000,
+                    'type'      => 'NUMERIC',
+                    'compare'   => '>',
+                ); 
+                break;
+              
+        }
+    }
+    //query by rent price
+    if (!empty($conditions['bds_rent_price'])) {
+        
+        switch ($conditions['bds_rent_price']) {
+            case '1':
+                $fields[] = array(
+                    'key'       => 'rent_price',
+                    'value'     => 1,
+                    'type'      => 'NUMERIC',
+                    'compare'   => '<',
+                );    
+                break;
+            case '2':
+                $fields[] = array(
+                    'key'       => 'rent_price',
+                    'value'     => array(1, 2),
+                    'compare'   => 'BETWEEN',
+                ); 
+                break;
+            case '3':
+                $fields[] = array(
+                    'key'       => 'rent_price',
+                    'value'     => array(2, 3),
+                    'compare'   => 'BETWEEN',
+                ); 
+                break;
+            case '4':
+                $fields[] = array(
+                    'key'       => 'rent_price',
+                    'value'     => array(3, 4),
+                    'compare'   => 'BETWEEN',
+                ); 
+                break;
+            case '5':
+                $fields[] = array(
+                    'key'       => 'rent_price',
+                    'value'     => 4,
+                    'type'      => 'NUMERIC',
+                    'compare'   => '>',
+                ); 
+                break;
+              
+        }
+    }
+    //number of bedroom
+    if (!empty($conditions['bds_bedroom'])) {
+        $fields[] =array(
+            'key' => 'bed_room',
+            'value' => $conditions['bds_bedroom'],
+            'type' => 'NUMERIC',
+            'compare' => '='
+        );
+    }
+
+    if (!empty($conditions['bds_quan'])) {
+        $fields[] =array(
+            'key' => 'district',
+            'value' => $conditions['bds_quan'],
+            'compare' => '='
+        );
+    }
+    //direction
+    if (!empty($conditions['bds_direction'])) {
+        $fields[] = array(
+            'key' => 'direction',
+            'value' => $conditions['direction'],
+            'compare' => '='
+        );
+    }
+    if (!empty($fields)) {
+        $fields['relation'] = 'AND';
+        $arr_query['meta_query'] = $fields;
+    }
+    $bds_query = new WP_Query( 
+        $arr_query
+    );
+    if ( $bds_query->have_posts() ) : 
+        while ($bds_query->have_posts()) : $bds_query->the_post();
+        $post[] = get_the_ID();
+        endwhile; 
+        $post['max_num_pages'] = $bds_query->max_num_pages;
+        $post['total'] = $bds_query->found_posts;
+    endif;
+    return $post;
+}
+
+/**
+ * Generate select option fields
+ */
+function huyhoang_generate_select_fields($name, $options) {
+  $output = "<select name='{$name}'>";
+  foreach ($options as $option) {
+    $select = '';
+    if (isset($_GET[$name]) && $_GET[$name] == $option['value']) {
+      $select = 'selected';
+    }
+    $op = "<option {$select} value='".$option['value']."'>".$option['name']."</option>";
+    $output.=$op;
+  }
+  $output.="</select>";
+  return $output;
+}
+
+/**
+ * load custom post type posts in category page
+ */
+function huyhoang_cat_post_type($query) {
+    if ( is_category() && ( ! isset( $query->query_vars['suppress_filters'] ) || false == $query->query_vars['suppress_filters'] ) ) {
+        $query->set( 'post_type', array( 'post', 'bat_dong_san' ) );
+        return $query;
+    }
+}
+add_filter('pre_get_posts', 'huyhoang_cat_post_type');
